@@ -10,12 +10,7 @@ use App\Http\Controllers\Controller;
 
 class TipomascotaApiController extends Controller
 {
-    function __constructor(){
-        $this->middleware('permission:ver-rol | crear-tipomascota | editar-tipomascota | borrar-tipomascota',['only'=>['index']]);
-        $this->middleware('permission:crear-tipomascota', ['only'=>['create','store']]);
-        $this->middleware('permission:editar-tipomascota', ['only'=>['editar','update']]);
-        $this->middleware('permission:borrar-tipomascota', ['only'=>['destroy']]);
-    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -51,7 +46,6 @@ class TipomascotaApiController extends Controller
     public function update(Request $request,$id)
     {
         $tipomascota = Tipomascota::find($id);
-
         $tipomascota->Tipo_Mascota =$request->Tipo_Mascota;
         $tipomascota->update();
         return response()->json($tipomascota, 200);

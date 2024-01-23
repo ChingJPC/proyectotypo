@@ -21,7 +21,8 @@ class UsuarioApiController extends Controller
      */
     public function index()
     {
-        $usuarios = User::paginate(10);
+        $usuario = User::all();
+        return response()->json($usuario, 200);
     }
 
     /**
@@ -99,6 +100,8 @@ class UsuarioApiController extends Controller
 
             $user->assignRole($request->input('roles'));
             return response()->json(['success' => 'User update successfully']);
+
+
     }
 
     /**
