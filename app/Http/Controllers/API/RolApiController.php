@@ -12,12 +12,6 @@ use Iluminate\Support\Facades\DB;
 
 class RolApiController extends Controller
 {
-    function __constructor(){
-        $this->middleware('permission:ver-rol | crear-rol | editar-rol | borrar-rol',['only'=>['index']]);
-        $this->middleware('permission:crear-rol', ['only'=>['create','store']]);
-        $this->middleware('permission:editar-rol', ['only'=>['editar','update']]);
-        $this->middleware('permission:borrar-rol', ['only'=>['destroy']]);
-    }
     /**
      * Display a listing of the resource.
      *

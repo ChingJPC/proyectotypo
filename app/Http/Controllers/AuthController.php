@@ -44,7 +44,7 @@ class AuthController extends Controller
         ]);
 
         $credentials = request(['email', 'password']);
-
+        
         if (!Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
@@ -106,6 +106,15 @@ class AuthController extends Controller
         ]);
 
         Admin::create([
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'apellido' => $request ->apellido,
+            'telefono' => $request ->telefono,
+            'fecha_nacimiento' =>$request ->fecha_nacimiento,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
