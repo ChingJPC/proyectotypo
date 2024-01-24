@@ -49,6 +49,11 @@ Route::group([
           Route::apiResource('Rol',RolApiController::class);
           Route::apiResource('Usuario',UsuarioApiController::class);
           //Route::post('Tipomascota', [TipomascotaApiController::class,"store"]);
+
+          Route::group(['middleware' => ['role:Administrator']], function () {
+          Route::apiResource('Tipomascota', TipomascotaApiController::class);
+          Route::get('tipomascota/{id}/destroy', 'TipomascotaApiController@destroy')->name('tipomascota.destroy');
+        });
       });
 });
 
