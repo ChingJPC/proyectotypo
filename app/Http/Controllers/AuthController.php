@@ -100,6 +100,7 @@ class AuthController extends Controller
 
     public function signUpadmin(Request $request)
     {
+
         $request->validate([
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string'
@@ -110,7 +111,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'apellido' => $request ->apellido,
             'telefono' => $request ->telefono,
@@ -118,6 +119,10 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
+
+        // Asignación del rol
+
+        $user->assignRole('Administrator');
 
         return response()->json([
             'message' => 'Successfully created admin!'
