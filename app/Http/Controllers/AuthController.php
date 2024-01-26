@@ -31,7 +31,6 @@ class AuthController extends Controller
         ]);
 
         // Asignación del rol
-
         $user->assignRole('User');
 
         return response()->json([

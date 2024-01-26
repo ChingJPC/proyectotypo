@@ -54,7 +54,6 @@ class InformacionApiController extends Controller
     {
             $informacion = Informacion::informatica($id);
             //$informacion->Id_Mascota =$request->Id_Mascota;
-            
             $informacion->Nombre_Mascota =$request->Nombre_Mascota;
             $informacion->Edad =$request->Edad; 
             $informacion->Raza =$request->Raza;

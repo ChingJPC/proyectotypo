@@ -54,14 +54,14 @@ Route::group([
           Route::apiResource('Tipomascota', TipomascotaApiController::class);
           Route::apiResource('Agendamiento',AgendamientoApiController::class );
           Route::apiResource('Actividad', ActividadApiController ::class);
-          Route::apiResource('Informacion', Informacion_ActividadController::class);
+          Route::apiResource('Informacion', InformacionApiController::class);
           });
 
           Route::group(['middleware' => ['role:User']], function () {
-          Route::get('Tipomascota-user', TipomascotaApiController::class);
-          Route::get('Agendamiento-user',AgendamientoApiController::class );
-          Route::get('Actividad-user', ActividadApiController ::class);
-          Route::get('Informacion-user', Informacion_ActividadController::class);
+          Route::get('Tipomascota-user', [TipomascotaApiController::class,"index"]);
+          Route::get('Agendamiento-user',[AgendamientoApiController::class,"index"] );
+          Route::get('Actividad-user', [ActividadApiController ::class,"index"]);
+          Route::get('Informacion-user', [InformacionApiController::class,"index"]);
         });
       });
 });
