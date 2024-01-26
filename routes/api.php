@@ -40,11 +40,11 @@ Route::group([
         Route::get('logout', [AuthController::class,"logout"]);
         Route::get('user', [AuthController::class, 'user']);
    
-          Route::apiResource('Informacion', InformacionApiController::class);
-          Route::apiResource('Agendamiento',AgendamientoApiController::class );
-          Route::apiResource('Tipomascota', TipomascotaApiController::class);
-          Route::apiResource('Actividad', ActividadApiController ::class);
-          Route::apiResource('Informacion_Actividad', Informacion_ActividadController::class);
+          //Route::apiResource('Informacion', InformacionApiController::class);
+          //Route::apiResource('Agendamiento',AgendamientoApiController::class );
+          //Route::apiResource('Tipomascota', TipomascotaApiController::class);
+          //Route::apiResource('Actividad', ActividadApiController ::class);
+          //Route::apiResource('Informacion_Actividad', Informacion_ActividadController::class);
           //Route::apiResource('Home', HomeApiController::class);
           Route::apiResource('Rol',RolApiController::class);
           Route::apiResource('Usuario',UsuarioApiController::class);
@@ -52,8 +52,16 @@ Route::group([
 
           Route::group(['middleware' => ['role:Administrator']], function () {
           Route::apiResource('Tipomascota', TipomascotaApiController::class);
-          Route::get('tipomascota/{id}/destroy', 'TipomascotaApiController@destroy')->name('tipomascota.destroy');
+          Route::apiResource('Agendamiento',AgendamientoApiController::class );
+          Route::apiResource('Actividad', ActividadApiController ::class);
+          Route::apiResource('Informacion', InformacionApiController::class);
+          });
+
+          Route::group(['middleware' => ['role:User']], function () {
+          Route::get('Tipomascota-user', [TipomascotaApiController::class,"index"]);
+          Route::get('Agendamiento-user',[AgendamientoApiController::class,"index"] );
+          Route::get('Actividad-user', [ActividadApiController ::class,"index"]);
+          Route::get('Informacion-user', [InformacionApiController::class,"index"]);
         });
       });
 });
-
