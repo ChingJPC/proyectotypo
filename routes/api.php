@@ -34,12 +34,13 @@ Route::group([
     Route::post('login', [AuthController::class,"login"]);
     Route::post('signup', [AuthController::class,"signup"]);
     Route::post('signupadmin', [AuthController::class,"signupadmin"]);
+
     Route::group([
       'middleware' => 'auth:api'
     ], function() {
         Route::get('logout', [AuthController::class,"logout"]);
         Route::get('user', [AuthController::class, 'user']);
-   
+
           //Route::apiResource('Informacion', InformacionApiController::class);
           //Route::apiResource('Agendamiento',AgendamientoApiController::class );
           //Route::apiResource('Tipomascota', TipomascotaApiController::class);
@@ -55,6 +56,8 @@ Route::group([
           Route::apiResource('Agendamiento',AgendamientoApiController::class );
           Route::apiResource('Actividad', ActividadApiController ::class);
           Route::apiResource('Informacion', InformacionApiController::class);
+
+          Route::get("/Informacion/user/{id}", [InformacionApiController::class,"getMascotasByUserId"]);
           });
 
           Route::group(['middleware' => ['role:User']], function () {
