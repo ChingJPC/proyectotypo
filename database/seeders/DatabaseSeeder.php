@@ -20,10 +20,11 @@ class DatabaseSeeder extends Seeder
         $this->call(AgendamientoSeeder::class);
         $this->call(InformacionSeeder::class);
         $this->call(Informacion_ActividadSeeder::class);
+        $this->call(AdminSeeder::class);
 
-        
 
 
-        
+
+
     }
 }

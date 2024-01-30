@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Informacion;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 
 class InformacionApiController extends Controller
 {
@@ -35,7 +35,7 @@ class InformacionApiController extends Controller
             $informacion->user_id =$request->user_id;
             $informacion->id_tipomascota =$request->id_tipomascota;
             $informacion->save();
-            return response()->json($informacion, 201);  
+            return response()->json($informacion, 201);
     }
 
     /**
@@ -50,18 +50,18 @@ class InformacionApiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-            $informacion = Informacion::informatica($id);
+            $informacion = Informacion::find($id);
             //$informacion->Id_Mascota =$request->Id_Mascota;
             $informacion->Nombre_Mascota =$request->Nombre_Mascota;
-            $informacion->Edad =$request->Edad; 
+            $informacion->Edad =$request->Edad;
             $informacion->Raza =$request->Raza;
             $informacion->Peso =$request->Peso;
             $informacion->id_tipomascota =$request->id_tipomascota;
-            $informacion->user_id =$request->user_id; 
+            $informacion->user_id =$request->user_id;
             $informacion->update();
-            return response()->json($informacion, 201); 
+            return response()->json($informacion, 201);
     }
 
     /**
@@ -74,7 +74,21 @@ class InformacionApiController extends Controller
         $informacion->delete();
         return response()->json($informacion, 200);
     }else{
-        return response()->json(['message' => 'Informacion de Mascoto no encontrada'], 404); 
+        return response()->json(['message' => 'Informacion de Mascoto no encontrada'], 404);
     }
+    }
+
+    /**
+     *
+     * Metodo para traer las mascotas de un usuario
+     */
+
+    public function getMascotasByUserId($id)
+    {
+        $informacion = DB::table("informacion")->where("user_id", "=", $id)->get();
+        if (!$informacion) {
+            return response()->json(['message' => 'Informacion de Mascoto no encontrada'], 404);
+        }
+        return response()->json($informacion, 200);
     }
 }

@@ -10,13 +10,13 @@ use App\Http\Controllers\Controller;
 
 class TipomascotaApiController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tipomascota = Tipomascota::paginate(10);
+        $tipomascota = Tipomascota::all();
         return response()->json($tipomascota, 200);
     }
 
@@ -62,8 +62,8 @@ class TipomascotaApiController extends Controller
         $tipomascota->delete();
         return response()->json($tipomascota, 200);
     }else{
-        return response()->json(['message' => 'Tipo mascota no encontrada'], 404); 
+        return response()->json(['message' => 'Tipo mascota no encontrada'], 404);
     }
-      
+
     }
 }
