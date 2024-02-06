@@ -15,7 +15,7 @@ class InformacionApiController extends Controller
      */
     public function index()
     {
-        $informacion = Informacion::all();
+        $informacion = Informacion::with("tipomascota")->get();
         return response()->json($informacion, 200);
     }
 

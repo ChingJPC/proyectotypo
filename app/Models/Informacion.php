@@ -28,7 +28,7 @@ class informacion extends Model
   }
 
   public function tipomascota(){
-        return $this->hasMany(Tipomascota::class, 'id_tipo', 'id');
+        return $this->belongsTo(Tipomascota::class, 'id_tipomascota', 'id');
   }
 
  // public function actividad(){
