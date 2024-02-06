@@ -11,6 +11,8 @@ use App\Http\Controllers\API\Informacion_ActividadController;
 //use App\Http\Controllers\API\HomeApiController;
 use App\Http\Controllers\API\RolApiController;
 use App\Http\Controllers\API\UsuarioApiController;
+use App\Http\Controllers\API\reporte_cumplimientoApiController;
+use App\Http\Controllers\API\LogrosApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,12 @@ use App\Http\Controllers\API\UsuarioApiController;
 // Route::apiResource('Agendamiento',AgendamientoApiController::class );
 
 //Route::apiResource('Tipomascota', TipomascotaApiController::class);
+Route::post('reporte_cumplimiento', [reporte_cumplimientoApiController::class, 'guardar']);
+Route::post('/logros/asignar', [LogrosApiController::class, 'asignarLogro']);
+
+
+
+
 
 Route::group([
     'prefix' => 'auth'
@@ -47,6 +55,17 @@ Route::group([
           //Route::apiResource('Actividad', ActividadApiController ::class);
           //Route::apiResource('Informacion_Actividad', Informacion_ActividadController::class);
           //Route::apiResource('Home', HomeApiController::class);
+         // Route::apiResource('reporte_cumplimiento', reporte_cumplimientoApiController::class);
+         
+
+         //Route::post('reporte_cumplimiento', [reporte_cumplimientoApiController::class, 'guardar']);
+         
+
+
+
+
+          Route::apiResource('logros', logrosApiController::class);
+
           Route::apiResource('Rol',RolApiController::class);
           Route::apiResource('Usuario',UsuarioApiController::class);
           //Route::post('Tipomascota', [TipomascotaApiController::class,"store"]);

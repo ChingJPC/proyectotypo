@@ -16,7 +16,8 @@ class logros extends Model
     protected $fillable = [
         'tipoLogro',
         'tiempoSemanal',
-        'dias'
+        'dias',
+       
    
     ];
 

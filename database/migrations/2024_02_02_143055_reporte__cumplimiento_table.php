@@ -13,16 +13,15 @@ class ReporteCumplimientoTable extends Migration
      */
     public function up()
     {
-        //
-
-        Schema::create('Reporte_Cumplimiento', function (Blueprint $table) {
+        Schema::create('reporte_cumplimiento', function (Blueprint $table) {
             $table->id();
-            $table->integer('si_cumplio');
-            $table->integer('no_cumplio');
-            $table->foreignId('logros_id');
+            $table->boolean('si_cumplio');
+            $table->boolean('no_cumplio');
+            $table->unsignedBigInteger('logros_id');
             $table->foreign('logros_id')->references('id')->on('logros');
+            $table->unsignedBigInteger('user_id'); 
+            $table->foreign('user_id')->references('id')->on('users'); 
             $table->timestamps();
-            
         });
     }
 
@@ -34,6 +33,5 @@ class ReporteCumplimientoTable extends Migration
     public function down()
     {
         Schema::dropIfExists('Reporte_Cumplimiento');
-        
     }
 }

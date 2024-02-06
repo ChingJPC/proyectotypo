@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class LogrosTable extends Migration
+class UserHasLogros extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class LogrosTable extends Migration
      */
     public function up()
     {
-        Schema::create('logros', function (Blueprint $table) {
+        Schema::create('user_has_logros', function (Blueprint $table) {
             $table->id();
-            $table->string('tipoLogro');
-            $table->timestamp('tiempoSemanal');
-            $table->integer('dias');
-            
-
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('logros_id'); 
+            $table->foreign('logros_id')->references('id')->on('logros'); 
             $table->timestamps();
-            
         });
     }
 
@@ -32,6 +30,6 @@ class LogrosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logros');
+        Schema::dropIfExists('user_has_logros');
     }
 }
