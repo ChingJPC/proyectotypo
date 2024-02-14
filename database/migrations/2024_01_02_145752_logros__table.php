@@ -16,7 +16,7 @@ class LogrosTable extends Migration
         Schema::create('logros', function (Blueprint $table) {
             $table->id();
             $table->string('tipoLogro');
-            $table->timestamp('tiempoSemanal');
+            $table->time('tiempoSemanal');
             $table->integer('dias');
             
 

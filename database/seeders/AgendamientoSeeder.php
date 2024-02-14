@@ -15,6 +15,6 @@ class AgendamientoSeeder extends Seeder
     public function run()
     {
         
-        Agendamiento::create(["id"=>1, "Actividades_a_Realizar"=>"jugar con la pelota", "Fecha_Agendamiento"=>"2023-11-14", "Tiempo_Disponible"=>3, "Nombre_Mascota"=>"luna"]);
+       // Agendamiento::create(["id"=>1, "Actividades_a_Realizar"=>"jugar con la pelota", "Fecha_Agendamiento"=>"2023-11-14", "Tiempo_Disponible"=>3, "Nombre_Mascota"=>"luna"]);
     }
 }

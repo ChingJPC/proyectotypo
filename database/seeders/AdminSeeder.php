@@ -16,6 +16,8 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
+
+        /*
         Role::create(["name" => "Administrator"]);
         Admin::create([
             "email" => "admin@gmail.com",
@@ -31,6 +33,6 @@ class AdminSeeder extends Seeder
         ]);
 
         // Asignación del rol
-        $user->assignRole('Administrator');
+        $user->assignRole('Administrator'); */
     }
 }

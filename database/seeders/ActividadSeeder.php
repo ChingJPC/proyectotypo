@@ -15,6 +15,6 @@ class ActividadSeeder extends Seeder
     public function run()
     {
         
-        Actividad::create(["id"=>1, "actividades_felinos"=>"si", "actividades_canidos"=>"no", "actividades_aves"=>"no"]);
+       // Actividad::create(["id"=>1, "actividades_felinos"=>"si", "actividades_canidos"=>"no", "actividades_aves"=>"no"]);
     }
 }

@@ -29,10 +29,10 @@ class ActividadApiController extends Controller
     public function store(Request $request)
     {
         $actividad = new Actividad();
-        $actividad->actividades_felinos =$request->actividades_felinos;
-        $actividad->actividades_canidos =$request->actividades_canidos;
-        $actividad->actividades_aves =$request->actividades_aves;
-        //$actividad->id_agendamiento =$request->id_agendamiento;
+        $actividad->nombre_actividad =$request->nombre_actividad;
+        $actividad->descripcion_actividad =$request->descripcion_actividad;
+        $actividad->agendamiento_id =$request->agendamiento_id;
+        
         $actividad->save();
         return response()->json($actividad, 201);
         
@@ -61,10 +61,9 @@ class ActividadApiController extends Controller
     public function update(Request $request, $id)
     {
         $actividad = new Actividad();
-        $actividad->actividades_felinos =$request->actividades_felinos;
-        $actividad->actividades_canidos =$request->actividades_canidos;
-        $actividad->actividades_aves =$request->actividades_aves;
-        $actividad->id_agendamiento =$request->id_agendamiento;
+        $actividad->nombre_actividad =$request->nombre_actividad;
+        $actividad->descripcion_actividad =$request->descripcion_actividad;
+        $actividad->agendamiento_id =$request->agendamiento_id;
         $actividad->update();
         return response()->json($actividad, 201);
     }

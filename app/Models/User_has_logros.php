@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Logros;
+use App\Models\User;
+
 
 class User_has_logros extends Model
 {
@@ -26,6 +29,5 @@ class User_has_logros extends Model
         return $this->belongsTo(Logros::class, 'logros_id', 'id');
     }
     
-
 
 }

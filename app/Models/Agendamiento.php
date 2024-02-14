@@ -12,14 +12,19 @@ class Agendamiento extends Model
     public $table  = "agendamiento";
 
     protected $fillable = [
-        'Actividades_a_Realizar',
+        'tiempo_asignado_actividad',
         'Fecha_Agendamiento',
-        'Tiempo_Disponible',
-        'Nombre_Mascota',
+        'confirmacion',
+        'user_id',
+        'reportecumplimiento_id'
     ];
 
-    public function actividad(){
-        return $this->hasMany(Actividad::class, 'id_actividad', 'id');
+    public function user(){
+        return $this->hasMany(User::class, 'user_id', 'id');
+  }
+
+  public function reportec_umplimiento(){
+        return $this->hasMany(Reporte_cumplimiento::class,'reportecumplimiento_id', 'id');
   }
      
 }

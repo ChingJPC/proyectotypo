@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Models\Agendamiento;
-use App\Models\Actividad;
+use App\Models\User;
+use App\Models\Reporte_cumplimiento;
 
 use App\Http\Controllers\Controller;
 
@@ -21,10 +22,11 @@ class AgendamientoApiController extends Controller
     public function store(Request $request)
     {
         $agendamiento = new Agendamiento();
-        $agendamiento->Actividades_a_Realizar = $request->Actividades_a_Realizar;
+        $agendamiento-> tiempo_asignado_actividad = $request->tiempo_asignado_actividad;
         $agendamiento->Fecha_Agendamiento = $request->Fecha_Agendamiento;
-        $agendamiento->Tiempo_Disponible = $request->Tiempo_Disponible;
-        $agendamiento->Nombre_Mascota = $request->Nombre_Mascota;
+        $agendamiento-> confirmacion= $request->confirmacion;
+        $agendamiento-> user_id = $request->user_id;
+        $agendamiento->reportecumplimiento_id = $request->reportecumplimiento_id;
         $agendamiento->save();
         return response()->json($agendamiento, 200);
     }
@@ -44,11 +46,11 @@ class AgendamientoApiController extends Controller
     public function update(Request $request,$id)
     {
         $agendamiento = Agendamiento::find($id);
-
-        $agendamiento->Actividades_a_Realizar = $request->Actividades_a_Realizar;
+        $agendamiento-> tiempo_asignado_actividad = $request->tiempo_asignado_actividad;
         $agendamiento->Fecha_Agendamiento = $request->Fecha_Agendamiento;
-        $agendamiento->Tiempo_Disponible = $request->Tiempo_Disponible;
-        $agendamiento->Nombre_Mascota = $request->Nombre_Mascota;
+        $agendamiento-> confirmacion= $request->confirmacion;
+        $agendamiento-> user_id = $request->user_id;
+        $agendamiento->reportecumplimiento_id = $request->reportecumplimiento_id;
         $agendamiento->save();
         return response()->json($agendamiento, 200);
     }

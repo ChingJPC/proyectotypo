@@ -29,6 +29,12 @@ class User extends Authenticatable
         'password',
     ];
 
+
+
+    public function logros(){
+        return $this->hasMany(logros::class, 'logro_id', 'id');
+  }
+
     /**
      * The attributes that should be hidden for serialization.
      *
