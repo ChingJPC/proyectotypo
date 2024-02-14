@@ -15,18 +15,30 @@ class LogrosApiController extends Controller
         return response()->json($logros, 200);
     }
     
-    public function store(Request $request)
+   /* public function store(Request $request)
     {
         $request->validate([
             'tipoLogro' => 'required|string',
-            'tiempoSemanal' => 'required|string',
-            'dias' => 'required|string'
+            'tiempoSemanal' => 'required|time',
+            'dias' => 'required|integer'
         ]);
     
         $logro = Logros::create($request->all());
         return response()->json($logro, 201);
-    }
-    
+    }*/
+
+    public function store(Request $request)
+{
+    $request->validate([
+        'tipoLogro' => 'required|string',
+        'tiempoSemanal' => 'required|date_format:H:i:s',
+        'dias' => 'required|integer'
+    ]);
+
+    $logro = Logros::create($request->all());
+    return response()->json($logro, 201);
+}
+
     public function show($id)
     {
         $logro = Logros::findOrFail($id);
@@ -37,8 +49,8 @@ class LogrosApiController extends Controller
     {
         $request->validate([
             'tipoLogro' => 'required|string',
-            'tiempoSemanal' => 'required|string',
-            'dias' => 'required|string'
+            'tiempoSemanal' => 'required|date_format:H:i:s',
+            'dias' => 'required|integer'
         ]);
     
         $logro = Logros::findOrFail($id);
@@ -56,11 +68,11 @@ class LogrosApiController extends Controller
     public function asignarLogro(Request $request)
     {
         $request->validate([
-            'usuario_id' => 'required|integer',
-            'tiempo_semanal' => 'required|string',
-            'dias_interaccion' => 'required|integer',
+            'tipoLogro' => 'required|string',
+            'tiempoSemanal' => 'required|date_format:H:i:s',
+            'dias' => 'required|integer'
         ]);
-    
+        
         $tiempoSemanal = $request->tiempo_semanal;
         $diasInteraccion = $request->dias_interaccion;
     
@@ -89,6 +101,8 @@ class LogrosApiController extends Controller
         return response()->json($logrosAsignados, 200);
     }
 }    
+
+
 
 
 
