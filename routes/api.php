@@ -34,6 +34,7 @@ Route::group([
     Route::post('login', [AuthController::class,"login"]);
     Route::post('signup', [AuthController::class,"signup"]);
     Route::post('signupadmin', [AuthController::class,"signupadmin"]);
+    Route::get('Cantidadmascota', [TipomascotaApiController::class,'getCantidadmascota']);
 
     Route::group([
       'middleware' => 'auth:api'
@@ -56,15 +57,19 @@ Route::group([
           Route::apiResource('Agendamiento',AgendamientoApiController::class );
           Route::apiResource('Actividad', ActividadApiController ::class);
           Route::apiResource('Informacion', InformacionApiController::class);
+          
+
 
           Route::get("/Informacion/user/{id}", [InformacionApiController::class,"getMascotasByUserId"]);
           });
 
+          Route::get('/mascotas', 'AuthController@getMascota');
           Route::group(['middleware' => ['role:User']], function () {
           Route::get('Tipomascota-user', [TipomascotaApiController::class,"index"]);
           Route::get('Agendamiento-user',[AgendamientoApiController::class,"index"] );
           Route::get('Actividad-user', [ActividadApiController ::class,"index"]);
           Route::get('Informacion-user', [InformacionApiController::class,"index"]);
+          //Route::get('Cantidadmascota', [TipomascotaApiController::class,'getCantidadmascota']);
         });
       });
 });

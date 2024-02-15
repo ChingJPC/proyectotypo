@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Tipomascota;
 use App\Models\Informacion;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 
 class TipomascotaApiController extends Controller
@@ -66,4 +67,15 @@ class TipomascotaApiController extends Controller
     }
 
     }
+
+    public function getCantidadmascota()
+{
+    $mascotas =DB::table('informacion')
+        ->join('tipomascota', 'tipomascota.id', '=', 'informacion.id_tipomascota')
+        ->select('tipomascota.Tipo_Mascota', DB::raw('COUNT(*) as cantidad'))
+        ->groupBy('tipomascota.Tipo_Mascota')
+        ->get();
+        return response()->json($mascotas, 200);
+}
+
 }
