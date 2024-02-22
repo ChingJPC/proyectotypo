@@ -27,7 +27,19 @@ class User extends Authenticatable
         'fecha_nacimiento',
         'email',
         'password',
+        'tiempo_total'
     ];
+
+
+
+    public function logros()
+    {
+        return $this->belongsToMany(Logro::class, 'user_has_logros', 'user_id', 'logro_id')
+                    ->withTimestamps();
+    }
+
+
+  
 
     /**
      * The attributes that should be hidden for serialization.

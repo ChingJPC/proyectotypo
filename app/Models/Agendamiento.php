@@ -9,17 +9,34 @@ class Agendamiento extends Model
 {
     use HasFactory;
 
-    public $table  = "agendamiento";
+    public $table = "agendamiento";
 
     protected $fillable = [
-        'Actividades_a_Realizar',
+        'tiempo_asignado_actividad',
         'Fecha_Agendamiento',
-        'Tiempo_Disponible',
-        'Nombre_Mascota',
-    ];
+        'cumplida',
+        'infomascota_id',
+        'actividades_id',
+        'user_id',
+        'reportecumplimiento_id'
 
-    public function actividad(){
-        return $this->hasMany(Actividad::class, 'id_actividad', 'id');
-  }
-     
+    ];
+  
+    public function informacion()
+    {
+        return $this->belongsTo(Informacion::class, 'infomascota_id', 'id');
+    }
+    
+    public function reporte_cumplimiento()
+    {
+        return $this->hasOne(Reporte_cumplimiento::class, 'reportecumplimiento_id', 'id');
+    }
+
+    public function actividades()
+    {
+        return $this->hasMany(Actividad::class, 'agendamiento_id', 'id');
+    }
 }
+
+     
+
