@@ -14,7 +14,9 @@ class reporte_cumplimiento extends Model
     protected $fillable = [
         'mes',
         'porcentaje_cumplimiento',
-        'total_agendamientos_cumplidos'
+        'total_agendamientos_cumplidos',
+        'user_id'
+
  
     ];
 
@@ -32,6 +34,13 @@ class reporte_cumplimiento extends Model
     {
         return $this->belongsTo(Logro::class, 'logro_id');
     }*/
+
+        public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+
 
 
   

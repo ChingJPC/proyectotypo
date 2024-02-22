@@ -31,6 +31,7 @@ class reporte_cumplimientoApiController extends Controller
         $reporte_cumplimiento-> mes = $request->mes;
         $reporte_cumplimiento-> porcentaje_cumplimiento = $request->porcentaje_cumplimiento;
         $reporte_cumplimiento-> total_agendamientos_cumplidos = $request->total_agendamientos_cumplidos;
+        $reporte_cumplimiento-> user_id = $request->user_id;
         $reporte_cumplimiento->save();
         return response()->json($reporte_cumplimiento, 201);
 
@@ -48,6 +49,7 @@ class reporte_cumplimientoApiController extends Controller
             $reporte_cumplimiento-> mes = $request->mes;
             $reporte_cumplimiento-> porcentaje_cumplimiento = $request->porcentaje_cumplimiento;
             $reporte_cumplimiento-> total_agendamientos_cumplidos = $request->total_agendamientos_cumplidos;
+            $reporte_cumplimiento-> user_id = $request->user_id;
             $reporte_cumplimiento->update();
             return response()->json($reporte_cumplimiento, 201);
     }
@@ -64,39 +66,43 @@ class reporte_cumplimientoApiController extends Controller
     }
     }
 
-    public function generarReporteCumplimientoMensual()
-{
-    // Obtener el primer y último día del mes actual
-    $primerDiaMes = Carbon::now()->startOfMonth();
-    $ultimoDiaMes = Carbon::now()->endOfMonth();
-
-    // Obtener los agendamientos cumplidos dentro del mes actual
-    $agendamientosCumplidos = Agendamiento::whereBetween('Fecha_Agendamiento', [$primerDiaMes, $ultimoDiaMes])
-        ->where('cumplida', 1)
-        ->get();
-
-    // Contar el número total de agendamientos realizados
-    $totalAgendamientos = Agendamiento::whereBetween('Fecha_Agendamiento', [$primerDiaMes, $ultimoDiaMes])
-        ->count();
-
-    // Calcular el porcentaje de cumplimiento
-    $porcentajeCumplimiento = $totalAgendamientos > 0 ? ($agendamientosCumplidos->count() / $totalAgendamientos) * 100 : 0;
-
-    // Guardar el reporte en la base de datos
-    $reporte = new Reporte_Cumplimiento();
-    $reporte->mes = $primerDiaMes->format('m/Y');
-    $reporte->porcentaje_cumplimiento = $porcentajeCumplimiento;
-    $reporte->total_agendamientos_cumplidos = $agendamientosCumplidos->count();
-    $reporte->save();
-
-    // Devolver los agendamientos cumplidos y otra información relevante
-    return [
-        'agendamientos_cumplidos' => $agendamientosCumplidos,
-        'total_agendamientos' => $totalAgendamientos,
-        'porcentaje_cumplimiento' => $porcentajeCumplimiento,
-        'mes_reporte' => $primerDiaMes->format('m/Y')
-    ];
-}
+    public function generarReporteCumplimientoMensualPorUsuario($usuarioId)
+    {
+        // Obtener el primer y último día del mes actual
+        $primerDiaMes = Carbon::now()->startOfMonth();
+        $ultimoDiaMes = Carbon::now()->endOfMonth();
+    
+        // Obtener los agendamientos cumplidos por el usuario dentro del mes actual
+        $agendamientosCumplidos = Agendamiento::where('user_id', $usuarioId)
+            ->whereBetween('Fecha_Agendamiento', [$primerDiaMes, $ultimoDiaMes])
+            ->where('cumplida', 1)
+            ->get();
+    
+        // Contar el número total de agendamientos realizados por el usuario
+        $totalAgendamientos = Agendamiento::where('user_id', $usuarioId)
+            ->whereBetween('Fecha_Agendamiento', [$primerDiaMes, $ultimoDiaMes])
+            ->count();
+    
+        // Calcular el porcentaje de cumplimiento por el usuario
+        $porcentajeCumplimiento = $totalAgendamientos > 0 ? ($agendamientosCumplidos->count() / $totalAgendamientos) * 100 : 0;
+    
+        // Guardar el reporte en la base de datos
+        $reporte = new Reporte_Cumplimiento();
+        $reporte->mes = $primerDiaMes->format('m/Y');
+        $reporte->porcentaje_cumplimiento = $porcentajeCumplimiento;
+        $reporte->total_agendamientos_cumplidos = $agendamientosCumplidos->count();
+        $reporte->user_id = $usuarioId; // Asignar el ID del usuario al reporte
+        $reporte->save();
+    
+        // Devolver los agendamientos cumplidos y otra información relevante
+        return [
+            'agendamientos_cumplidos' => $agendamientosCumplidos,
+            'total_agendamientos' => $totalAgendamientos,
+            'porcentaje_cumplimiento' => $porcentajeCumplimiento,
+            'mes_reporte' => $primerDiaMes->format('m/Y')
+        ];
+    }
+    
 
 
    /* public function asignarLogros($id)

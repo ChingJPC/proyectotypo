@@ -45,6 +45,8 @@ Route::post('/actualizar-tiempo-mascotas', [AgendamientoApiController::class, 'a
 Route::post('/asignar-logros', [LogrosApiController::class, 'asignarLogrosAMascotas'])->name('logros.asignar_logros');
 Route::get('/generar-reporte-cumplimiento-mensual', [reporte_cumplimientoApiController::class, 'generarReporteCumplimientoMensual']);
 
+Route::get('/reportes/{usuarioId}/cumplimiento-mensual', [reporte_cumplimientoApiController::class, 'generarReporteCumplimientoMensualPorUsuario'])->name('reporte.cumplimiento.mensual');
+
 
 
 
