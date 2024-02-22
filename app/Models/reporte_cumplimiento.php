@@ -8,30 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 class reporte_cumplimiento extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+
+    protected $table = 'reporte_cumplimiento';
 
     protected $fillable = [
-        'si_cumplio',
-        'no_cumplio',
-        'user_id',
-        'logros_id'
-   
+        'mes',
+        'porcentaje_cumplimiento',
+        'total_agendamientos_cumplidos'
+ 
     ];
 
-    public $table = 'reporte_cumplimiento';
 
-    public function users(){
-        return $this->hasMany(User::class, 'user_id', 'id');
+    public $timestamps = false;
+
+    // Define la relación con el modelo User
+    /*public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
-    
-   
 
-    public function logros(){
-        return $this->hasMany(logros::class, 'logros_id', 'id');
-  }
+    // Define la relación con el modelo Logro
+    public function logro()
+    {
+        return $this->belongsTo(Logro::class, 'logro_id');
+    }*/
 
 
-
- 
   
 }

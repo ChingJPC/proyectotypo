@@ -19,6 +19,7 @@ return new class extends Migration
         $table->tinyinteger('Peso');
         $table->float('Tamaño');
         $table->string('Sexo');
+        $table->time('tiempo_total')->default('00:00:00');
         $table->foreignId('user_id');
         $table->foreign('user_id')->references('id')->on('users');
         $table->foreignId('id_tipomascota');

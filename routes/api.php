@@ -35,6 +35,17 @@ Route::post('reporte_cumplimiento', [reporte_cumplimientoApiController::class, '
 Route::post('/logros/asignar', [LogrosApiController::class, 'asignarLogro']);
 Route::get('usuarios/{usuario_id}/logros', [LogrosApiController::class, 'logrosAsignadosAUsuario']);
 Route::apiResource('reporte_cumplimiento', reporte_cumplimientoApiController ::class);
+Route::put('/actividades/{id}/marcarcomocumplida', [ActividadApiController::class, 'marcarComoCumplida']);
+//Route::get('/agendamiento/{id}/calcular-tiempo-acumulado', 'App\Http\Controllers\API\AgendamientoApiController@calcularTiempoAcumulado');
+
+Route::get('/agendamientos/{user_id}/calcular-tiempo-acumulado', [AgendamientoApiController::class, 'calcularTiempoAcumuladoUsuario']);
+Route::get('/usuarios/{userId}/tiempo-total', [UsuarioApiController::class, 'obtenerTiempoTotal']);
+
+Route::post('/actualizar-tiempo-mascotas', [AgendamientoApiController::class, 'actualizarTiempoTotalPorMascota']);
+Route::post('/asignar-logros', [LogrosApiController::class, 'asignarLogrosAMascotas'])->name('logros.asignar_logros');
+Route::get('/generar-reporte-cumplimiento-mensual', [reporte_cumplimientoApiController::class, 'generarReporteCumplimientoMensual']);
+
+
 
 
 

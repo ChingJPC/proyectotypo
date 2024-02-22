@@ -17,7 +17,7 @@ class LogrosTable extends Migration
             $table->id();
             $table->string('tipoLogro');
             $table->time('tiempoSemanal');
-            $table->integer('dias');
+
             
 
             $table->timestamps();

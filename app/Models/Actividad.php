@@ -13,15 +13,20 @@ class Actividad extends Model
         'nombre_actividad',
         'descripcion_actividad',
         'agendamiento_id',
+        //'cumplida'
+
         
     ];
 
     public $table  = "actividad";
     public $timestamps = false;
 
-    public function agendamiento(){
-        return $this->hasMany(agendamiento::class, 'agendamiento_id', 'id');
-  }
+
+
+  public function agendamiento()
+{
+    return $this->belongsTo(Agendamiento::class, 'agendamiento_id', 'id');
+}
   
 
     

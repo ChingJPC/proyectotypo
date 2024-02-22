@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Models\Informacion;
+use App\Models\Agendamiento;
+use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +34,7 @@ class InformacionApiController extends Controller
             $informacion->Peso =$request->Peso;
             $informacion->Tamaño =$request->Tamaño;
             $informacion->Sexo =$request->Sexo;
+            $informacion->tiempoTotal =$request->tiempoTotal;
             $informacion->user_id =$request->user_id;
             $informacion->id_tipomascota =$request->id_tipomascota;
             $informacion->save();
@@ -58,6 +61,9 @@ class InformacionApiController extends Controller
             $informacion->Edad =$request->Edad;
             $informacion->Raza =$request->Raza;
             $informacion->Peso =$request->Peso;
+            $informacion->Tamaño =$request->Tamaño;
+            $informacion->Sexo =$request->Sexo;
+            $informacion->tiempoTotal =$request->tiempoTotal;
             $informacion->id_tipomascota =$request->id_tipomascota;
             $informacion->user_id =$request->user_id;
             $informacion->update();
@@ -91,4 +97,11 @@ class InformacionApiController extends Controller
         }
         return response()->json($informacion, 200);
     }
+
+    
+
+   
+   
+
+
 }

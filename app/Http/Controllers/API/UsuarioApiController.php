@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 //agregamos
 use App\Models\User;
+use App\Models\Agendamiento;
+use App\Models\Informacion;
 use Spatie\Permission\Models\Role;
 use Iluminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -115,4 +117,30 @@ class UsuarioApiController extends Controller
         User::find($id)->delete();
         return response()->json(['success' => 'User delete successfully']);
     }
+
+
+    public function obtenerTiempoTotal($userId)
+    {
+        $tiempoTotal = Agendamiento::whereHas('informacion', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->sum('tiempo_asignado_actividad');
+
+        $usuario = User::find($userId);
+
+        if ($usuario) {
+            $usuario->tiempo_total = $tiempoTotal;
+            $usuario->save();
+
+            return response()->json(['message' => 'Tiempo total actualizado correctamente', 'tiempo_total' => $tiempoTotal], 200);
+        } else {
+            return response()->json(['error' => 'El usuario no se encontró'], 404);
+        }
+    }
+
+
+
+
+
+
+
 }

@@ -16,9 +16,11 @@ class UserHasLogros extends Migration
         Schema::create('user_has_logros', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('logros_id');
+            $table->unique(['user_id', 'logros_id']);
+
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('logros_id'); 
-            $table->foreign('logros_id')->references('id')->on('logros'); 
+            $table->foreign('logros_id')->references('id')->on('logros')->onDelete('cascade');
             $table->timestamps();
         });
     }
