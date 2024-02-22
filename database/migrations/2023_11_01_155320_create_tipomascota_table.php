@@ -12,12 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tipomascota', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // Esto define la columna 'id' como autoincremental
             $table->string('Tipo_Mascota');
-
-                
-
-             
         });
     }
 

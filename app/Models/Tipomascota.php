@@ -27,13 +27,4 @@ class Tipomascota extends Model
 
 
 
-    //public function salida_motivo(){
-        //return $this->belongsToMany(Motivo::class, 'salidas', 'aprendiz_id', 'motivo_id')->withPivot('id', 'user_id', 'fecha', 'hora', 'duracion', 'otros')->using(Salida::class);
-
-    //}
-
-    //public function salida_user(){
-       // return $this->belongsToMany(User::class, 'salidas', 'aprendiz_id', 'user_id');
-    //}
-
 }

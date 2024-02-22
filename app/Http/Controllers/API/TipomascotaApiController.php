@@ -58,7 +58,7 @@ class TipomascotaApiController extends Controller
     public function destroy($id)
     {
 
-        $tipomascota = Informacion::find($id);
+        $tipomascota = Tipomascota::find($id);
         if($tipomascota){
         $tipomascota->delete();
         return response()->json($tipomascota, 200);

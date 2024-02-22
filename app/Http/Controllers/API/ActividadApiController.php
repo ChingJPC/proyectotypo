@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Actividad;
 use App\Models\Agendamiento;
+use App\Models\Reporte_cumplimiento;
 
 class ActividadApiController extends Controller
 {
@@ -29,14 +30,14 @@ class ActividadApiController extends Controller
     public function store(Request $request)
     {
         $actividad = new Actividad();
-        $actividad->actividades_felinos =$request->actividades_felinos;
-        $actividad->actividades_canidos =$request->actividades_canidos;
-        $actividad->actividades_aves =$request->actividades_aves;
-        //$actividad->id_agendamiento =$request->id_agendamiento;
+        $actividad->nombre_actividad = $request->nombre_actividad;
+        $actividad->descripcion_actividad = $request->descripcion_actividad;
+        $actividad->agendamiento_id = $request->agendamiento_id;
+    
+        
         $actividad->save();
+
         return response()->json($actividad, 201);
-        
-        
     }
 
     /**
@@ -48,7 +49,7 @@ class ActividadApiController extends Controller
     public function show($id)
     {
         $actividad = Actividad::find($id);
-        return response()->json($actividad,200);
+        return response()->json($actividad, 200);
     }
 
     /**
@@ -60,13 +61,18 @@ class ActividadApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $actividad = new Actividad();
-        $actividad->actividades_felinos =$request->actividades_felinos;
-        $actividad->actividades_canidos =$request->actividades_canidos;
-        $actividad->actividades_aves =$request->actividades_aves;
-        $actividad->id_agendamiento =$request->id_agendamiento;
-        $actividad->update();
-        return response()->json($actividad, 201);
+        $actividad = Actividad::find($id);
+        if (!$actividad) {
+            return response()->json(['message' => 'Actividad no encontrada'], 404);
+        }
+
+        $actividad->nombre_actividad = $request->nombre_actividad;
+        $actividad->descripcion_actividad = $request->descripcion_actividad;
+        $actividad->agendamiento_id = $request->agendamiento_id;
+    
+        $actividad->save();
+
+        return response()->json($actividad, 200);
     }
 
     /**
@@ -78,11 +84,69 @@ class ActividadApiController extends Controller
     public function destroy($id)
     {
         $actividad = Actividad::find($id);
-        if($actividad){
+        if (!$actividad) {
+            return response()->json(['message' => 'Actividad no encontrada'], 404);
+        }
+
         $actividad->delete();
-        return response()->json($actividad, 200);
-    }else{
-        return response()->json(['message' => 'actividad de Mascoto no encontrada'], 404); 
+        return response()->json(['message' => 'Actividad eliminada correctamente'], 200);
     }
-    }
+
+    /**
+     * Marca una actividad como cumplida.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    
+
+     public function marcarComoCumplida($id)
+     {
+         $actividad = Actividad::find($id);
+     
+         if (!$actividad) {
+             return response()->json(['message' => 'Actividad no encontrada'], 404);
+         }
+     
+         // Marcar la actividad como cumplida
+         $actividad->cumplida = true;
+         $actividad->save();
+     
+          /* Cargar la relación 'agendamiento' para acceder a sus propiedades
+         $actividad->load('agendamiento');
+     
+         // Verificar si la relación agendamiento está cargada correctamente
+         if (!$actividad->agendamiento) {
+             return response()->json(['message' => 'No se encontró agendamiento para la actividad'], 404);
+         }
+     
+         // Verificar si el logro_id está presente en la relación agendamiento
+         if (!$actividad->agendamiento->logro_id) {
+             return response()->json(['message' => 'No se encontró logro para el agendamiento'], 404);
+         }
+     
+         // Generar el reporte de cumplimiento
+         $reporte_cumplimiento = new Reporte_cumplimiento();
+         $reporte_cumplimiento->tiempo_cumplido = $actividad->duracion;
+         $reporte_cumplimiento->observaciones = 'Actividad cumplida';
+         $reporte_cumplimiento->logro_id = $actividad->agendamiento->logro_id;
+         $reporte_cumplimiento->user_id = $actividad->agendamiento->user_id;
+     
+         // Se debe asignar el logro correspondiente
+         $reporte_cumplimiento->save();
+     
+         return response()->json(['message' => 'Actividad marcada como cumplida y reporte de cumplimiento generado'], 200);
+     }*/
+     
+
+    
 }
+}
+
+
+
+
+
+
+
+
