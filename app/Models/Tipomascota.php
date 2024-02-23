@@ -25,15 +25,11 @@ class Tipomascota extends Model
         return $this->hasMany(Informacion::class,'id_mascota', 'id');
     }
 
+    public function actividades()
+    {
+        return $this->hasMany(Actividad::class, 'tipomascota_id');
+    }
 
 
-    //public function salida_motivo(){
-        //return $this->belongsToMany(Motivo::class, 'salidas', 'aprendiz_id', 'motivo_id')->withPivot('id', 'user_id', 'fecha', 'hora', 'duracion', 'otros')->using(Salida::class);
-
-    //}
-
-    //public function salida_user(){
-       // return $this->belongsToMany(User::class, 'salidas', 'aprendiz_id', 'user_id');
-    //}
 
 }

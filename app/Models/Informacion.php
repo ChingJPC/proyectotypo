@@ -17,6 +17,7 @@ class informacion extends Model
         'Peso',
         'Tamaño',
         'Sexo',
+        'tiempo_total',
         'user_id',
         'id_tipomascota'
     ];

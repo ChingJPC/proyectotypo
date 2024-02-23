@@ -10,18 +10,30 @@ class Actividad extends Model
     use HasFactory;
 
     protected $fillable = [
-        'actividades_felinos',
-        'actividades_canidos',
-        'actividades_aves',
+        'nombre_actividad',
+        'descripcion_actividad',
+        'tipomascota_id'
+        //'cumplida'
+
         
     ];
 
     public $table  = "actividad";
     public $timestamps = false;
 
-    public function informacion(){
-        return $this->belongsToMany(Informacion::class)->withPivot('id');
-    }
+
+
+  public function agendamiento()
+{
+    return $this->belongsTo(Agendamiento::class, 'agendamiento_id', 'id');
+}
+
+public function tipomascota()
+{
+    return $this->belongsTo(Tipomascota::class, 'tipomascota_id');
+}
+  
+
     
   
 }
