@@ -46,7 +46,7 @@ Route::post('/asignar-logros', [LogrosApiController::class, 'asignarLogrosAMasco
 Route::get('/generar-reporte-cumplimiento-mensual', [reporte_cumplimientoApiController::class, 'generarReporteCumplimientoMensual']);
 
 Route::get('/reportes/{usuarioId}/cumplimiento-mensual', [reporte_cumplimientoApiController::class, 'generarReporteCumplimientoMensualPorUsuario'])->name('reporte.cumplimiento.mensual');
-
+Route::get('/obtenerActividadesMascota/{id}', [ActividadApiController::class, 'obtenerActividadesMascota']);
 
 
 
@@ -57,6 +57,7 @@ Route::get('/reportes/{usuarioId}/cumplimiento-mensual', [reporte_cumplimientoAp
 Route::apiResource('Actividad', ActividadApiController ::class);
 Route::apiResource('Agendamiento',AgendamientoApiController::class );
 Route::apiResource('User_has_logros',UserhaslogrosApiController::class );
+
 //Route::post('Agendamiento',[AgendamientoApiController::class,"store"] );
 
 

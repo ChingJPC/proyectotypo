@@ -12,7 +12,7 @@ class Actividad extends Model
     protected $fillable = [
         'nombre_actividad',
         'descripcion_actividad',
-        'agendamiento_id',
+        'tipomascota_id'
         //'cumplida'
 
         
@@ -26,6 +26,11 @@ class Actividad extends Model
   public function agendamiento()
 {
     return $this->belongsTo(Agendamiento::class, 'agendamiento_id', 'id');
+}
+
+public function tipomascota()
+{
+    return $this->belongsTo(Tipomascota::class, 'tipomascota_id');
 }
   
 
