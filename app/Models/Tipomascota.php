@@ -25,6 +25,11 @@ class Tipomascota extends Model
         return $this->hasMany(Informacion::class,'id_mascota', 'id');
     }
 
+    public function actividades()
+    {
+        return $this->hasMany(Actividad::class, 'tipomascota_id');
+    }
+
 
 
 }

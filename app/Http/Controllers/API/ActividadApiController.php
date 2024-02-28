@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Actividad;
 use App\Models\Agendamiento;
 use App\Models\Reporte_cumplimiento;
+use App\Models\tipomascota;
+use App\Models\tipomascota_has_actividad;
+
 
 class ActividadApiController extends Controller
 {
@@ -32,7 +35,7 @@ class ActividadApiController extends Controller
         $actividad = new Actividad();
         $actividad->nombre_actividad = $request->nombre_actividad;
         $actividad->descripcion_actividad = $request->descripcion_actividad;
-        $actividad->agendamiento_id = $request->agendamiento_id;
+       
     
         
         $actividad->save();
@@ -68,7 +71,7 @@ class ActividadApiController extends Controller
 
         $actividad->nombre_actividad = $request->nombre_actividad;
         $actividad->descripcion_actividad = $request->descripcion_actividad;
-        $actividad->agendamiento_id = $request->agendamiento_id;
+    
     
         $actividad->save();
 
@@ -141,6 +144,37 @@ class ActividadApiController extends Controller
 
     
 }
+
+public function obtenerActividadesMascota($id){
+    $actividadmascota = tipomascota_has_actividad::where("tipomascota_id", $id)->get();
+    
+    
+    $actividades = array();
+    foreach ($actividadmascota as $ac) {
+        $actividad = Actividad::where("id", $ac->actividad_id)->first();
+
+        array_push($actividades, $actividad);
+    }
+
+    return response()->json($actividades, 200);
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
 }
 
 
