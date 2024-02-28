@@ -116,15 +116,14 @@ Route::group([
           //Route::apiResource('Agendamiento',AgendamientoApiController::class );
           Route::apiResource('Actividad', ActividadApiController ::class);
           Route::apiResource('Informacion', InformacionApiController::class);
-
           Route::get("/Informacion/user/{id}", [InformacionApiController::class,"getMascotasByUserId"]);
           });
 
           Route::group(['middleware' => ['role:User']], function () {
           Route::get('Tipomascota-user', [TipomascotaApiController::class,"index"]);
-          //Route::get('Agendamiento-user',[AgendamientoApiController::class,"index"] );
+          //Route::get('Agendamiento-user',[AgendamientoApiController::class,"index"]);
           Route::get('Actividad-user', [ActividadApiController ::class,"index"]);
-          Route::get('Informacion-user', [InformacionApiController::class,"index"]);
+          Route::apiResource('Informacion', InformacionApiController::class);
         });
       });
 });
